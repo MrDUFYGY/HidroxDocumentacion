@@ -1,0 +1,108 @@
+---
+
+---
+<div class="custom-dialog-container">
+    <button class="custom-dialog-open-btn">Abrir demo vanilla Dialog</button>
+
+    <dialog class="custom-dialog-box">
+        <p>Este es un diálogo funcional con clases específicas.</p>
+        <button class="custom-dialog-close-btn">Cerrar</button>
+    </dialog>
+</div>
+
+<script type="text/javascript" is:inline>
+    const dialogBox = document.querySelector('.custom-dialog-box');
+    const openDialogButton = document.querySelector('.custom-dialog-open-btn');
+    const closeDialogButton = document.querySelector('.custom-dialog-close-btn');
+
+    openDialogButton.addEventListener('click', () => {
+        dialogBox.showModal();
+    });
+
+    closeDialogButton.addEventListener('click', () => {
+        dialogBox.close();
+    });
+</script>
+
+
+<style>
+    /* Estilo general del contenedor */
+    .custom-dialog-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Estilo para el botón que abre el diálogo */
+    .custom-dialog-open-btn {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        width: 100%;
+    }
+
+    .custom-dialog-open-btn:hover {
+        background-color: #45a049;
+    }
+
+    /* Estilo del cuadro de diálogo */
+    .custom-dialog-box {
+        border: none;
+        border-radius: 10px;
+        padding: 20px;
+        width: 300px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        background-color: #f9f9f9;
+        animation: fadeIn 0.3s ease-out;
+
+        /* Centrar el cuadro de diálogo */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* Animación de entrada */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -40%);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+    }
+
+    /* Estilo para el botón que cierra el diálogo */
+    .custom-dialog-close-btn {
+        padding: 10px 15px;
+        background-color: #f44336;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+        margin-top: 15px;
+    }
+
+    .custom-dialog-close-btn:hover {
+        background-color: #d32f2f;
+    }
+
+    /* Estilo para el contenido del diálogo */
+    .custom-dialog-box p {
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+</style>

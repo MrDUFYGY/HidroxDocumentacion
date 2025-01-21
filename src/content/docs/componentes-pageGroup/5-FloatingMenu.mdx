@@ -1,0 +1,140 @@
+---
+title: 'Menu Flotante'
+description: 'Componente que nos ayuda a generar un menu flotante con diferentes opciones.'
+---
+
+
+
+import MenuFlotante from '../../components/MenuFlotante.astro';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Podemos encontrar varias formas de disponer contenido o funcionalidades dentro de una pagina web, donde podremos ver pequeños NavBars o SideBars, sin embargo, en el caso de que queramos un menu que pueda aparecer y mantener o bien ocultarse, podremos ver este menu flotante.
+   
+
+# Introducción
+
+Par poder tener un menú flotante, podemos hacer uso de un HTML, CSS y JS puro, el cual tambien sera generado en React para ser un componente y no codigo simplemente reutilizable.
+
+## Ejemplo del Menu flotante
+
+Esta alternativa es la más sencilla y es la que vamos a usar en este caso, por lo que vamos a ver como se implementa en nuestro proyecto. Para ello, vamos a ver el siguiente codigo y tambien verlo en el demo. 
+
+<MenuFlotante />
+
+<Tabs>
+    <TabItem label="HTML" icon="star">
+        ```html 
+    <!-- Menú flotante -->
+    <div class="floating-menu" id="floating-menu">
+        <h4>Menú de opciones</h4>
+
+
+        <button onclick="cierreMenuFlotante()" id="close-menu-btn">X</button>
+
+        <button onclick="window.location.href='/home'">Ir al Inicio
+        <!-- Botón que muestra la tarjeta de contacto -->
+
+
+
+        <button onclick="window.history.back();">Atras</button>
+        <button onclick="alert('Otra opción 3')">Ejemplo 1</button>
+
+
+    </div>
+        ```
+    </TabItem>
+    <TabItem label="CSS" icon="moon">
+        ```html collapse={4-80}
+        <style>
+           /* Estilos para el menú flotante */
+#floating-menu {
+    position: fixed;
+    bottom: 20px;
+    right: 120px;
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.8);
+    max-height: 85%;
+    overflow-y: auto;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: block; /* Escondido por defecto */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+    #floating-menu button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        background-color: #D0D83A;
+        border: none;
+        color: black;
+        font-size: 12px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+        #floating-menu button:hover {
+            background-color: #18AC54;
+        }
+/* Botón flotante para cerrar o mostrar el menú */
+/* Estilo del botón "X" para cerrar el menú flotante */
+#close-menu-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    border: none;
+    max-height:30px;
+    max-width: 30px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    #close-menu-btn:hover {
+        color: yellow;
+    }
+        </style>           
+        ```
+    </TabItem>
+    <TabItem label="JS" icon="moon">
+        ```html
+        <script type="text/javascript" is:inline>
+            function addNewButton() {
+    const menu = document.getElementById('floating-menu');
+
+    // Crear un nuevo botón
+    const newButton = document.createElement('button');
+    newButton.innerHTML = 'Ejemplo 2';
+    newButton.onclick = function () {
+        alert('Nueva opción seleccionada');
+        // Puedes agregar aquí cualquier funcionalidad adicional
+    };
+
+    // Agregar el botón al menú
+    menu.appendChild(newButton);
+}
+
+// Llamar a la función para agregar el botón cuando se cargue la página
+window.onload = function () {
+    addNewButton();
+};
+
+
+
+
+        </script>
+        ```
+    </TabItem>
+    <TabItem label="Demo">
+
+            <iframe   style="width: 800px; height: 400px; border: none;" src="https://codi.link/ICAgIDwhLS0gTWVuw7ogZmxvdGFudGUgLS0+DQogICAgPGRpdiBjbGFzcz0iZmxvYXRpbmctbWVudSIgaWQ9ImZsb2F0aW5nLW1lbnUiPg0KICAgICAgICA8aDQ+TWVuw7ogZGUgb3BjaW9uZXM8L2g0Pg0KDQoNCiAgICAgICAgPGJ1dHRvbiBvbmNsaWNrPSJjaWVycmVNZW51RmxvdGFudGUoKSIgaWQ9ImNsb3NlLW1lbnUtYnRuIj5YPC9idXR0b24+DQoNCiAgICAgICAgPGJ1dHRvbiBvbmNsaWNrPSJ3aW5kb3cubG9jYXRpb24uaHJlZj0nL2hvbWUnIj5JciBhbCBJbmljaW8NCiAgICAgICAgPCEtLSBCb3TDs24gcXVlIG11ZXN0cmEgbGEgdGFyamV0YSBkZSBjb250YWN0byAtLT4NCg0KDQoNCiAgICAgICAgPGJ1dHRvbiBvbmNsaWNrPSJ3aW5kb3cuaGlzdG9yeS5iYWNrKCk7Ij5BdHJhczwvYnV0dG9uPg0KICAgICAgICA8YnV0dG9uIG9uY2xpY2s9ImFsZXJ0KCdPdHJhIG9wY2nDs24gMycpIj5FamVtcGxvIDE8L2J1dHRvbj4NCg0KDQogICAgPC9kaXY+%7CLyogRXN0aWxvcyBwYXJhIGVsIG1lbsO6IGZsb3RhbnRlICovDQojZmxvYXRpbmctbWVudSB7DQogICAgcG9zaXRpb246IGZpeGVkOw0KICAgIGJvdHRvbTogMjBweDsNCiAgICByaWdodDogMTIwcHg7DQogICAgd2lkdGg6IDIwMHB4Ow0KICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC44KTsNCiAgICBtYXgtaGVpZ2h0OiA4NSU7DQogICAgb3ZlcmZsb3cteTogYXV0bzsNCiAgICBjb2xvcjogd2hpdGU7DQogICAgcGFkZGluZzogMTBweDsNCiAgICBib3JkZXItcmFkaXVzOiAxMHB4Ow0KICAgIGRpc3BsYXk6IGJsb2NrOyAvKiBFc2NvbmRpZG8gcG9yIGRlZmVjdG8gKi8NCiAgICBib3gtc2hhZG93OiAwcHggNHB4IDEwcHggcmdiYSgwLCAwLCAwLCAwLjUpOw0KICAgIHotaW5kZXg6IDEwMDsNCn0NCg0KICAgICNmbG9hdGluZy1tZW51IGJ1dHRvbiB7DQogICAgICAgIGRpc3BsYXk6IGJsb2NrOw0KICAgICAgICB3aWR0aDogMTAwJTsNCiAgICAgICAgcGFkZGluZzogMTBweDsNCiAgICAgICAgbWFyZ2luOiAxMHB4IDA7DQogICAgICAgIGJhY2tncm91bmQtY29sb3I6ICNEMEQ4M0E7DQogICAgICAgIGJvcmRlcjogbm9uZTsNCiAgICAgICAgY29sb3I6IGJsYWNrOw0KICAgICAgICBmb250LXNpemU6IDEycHg7DQogICAgICAgIGN1cnNvcjogcG9pbnRlcjsNCiAgICAgICAgYm9yZGVyLXJhZGl1czogNXB4Ow0KICAgIH0NCg0KICAgICAgICAjZmxvYXRpbmctbWVudSBidXR0b246aG92ZXIgew0KICAgICAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogIzE4QUM1NDsNCiAgICAgICAgfQ0KLyogQm90w7NuIGZsb3RhbnRlIHBhcmEgY2VycmFyIG8gbW9zdHJhciBlbCBtZW7DuiAqLw0KLyogRXN0aWxvIGRlbCBib3TDs24gIlgiIHBhcmEgY2VycmFyIGVsIG1lbsO6IGZsb3RhbnRlICovDQojY2xvc2UtbWVudS1idG4gew0KICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsNCiAgICB0b3A6IDEwcHg7DQogICAgcmlnaHQ6IDEwcHg7DQogICAgYmFja2dyb3VuZC1jb2xvcjogcmVkOw0KICAgIGJvcmRlcjogbm9uZTsNCiAgICBtYXgtaGVpZ2h0OjMwcHg7DQogICAgbWF4LXdpZHRoOiAzMHB4Ow0KICAgIGNvbG9yOiB3aGl0ZTsNCiAgICBmb250LXNpemU6IDE4cHg7DQogICAgZm9udC13ZWlnaHQ6IGJvbGQ7DQogICAgY3Vyc29yOiBwb2ludGVyOw0KfQ0KDQogICAgI2Nsb3NlLW1lbnUtYnRuOmhvdmVyIHsNCiAgICAgICAgY29sb3I6IHllbGxvdzsNCiAgICB9%7CZnVuY3Rpb24gYWRkTmV3QnV0dG9uKCkgew0KICAgIGNvbnN0IG1lbnUgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnZmxvYXRpbmctbWVudScpOw0KDQogICAgLy8gQ3JlYXIgdW4gbnVldm8gYm90w7NuDQogICAgY29uc3QgbmV3QnV0dG9uID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnYnV0dG9uJyk7DQogICAgbmV3QnV0dG9uLmlubmVySFRNTCA9ICdFamVtcGxvIDInOw0KICAgIG5ld0J1dHRvbi5vbmNsaWNrID0gZnVuY3Rpb24gKCkgew0KICAgICAgICBhbGVydCgnTnVldmEgb3BjacOzbiBzZWxlY2Npb25hZGEnKTsNCiAgICAgICAgLy8gUHVlZGVzIGFncmVnYXIgYXF1w60gY3VhbHF1aWVyIGZ1bmNpb25hbGlkYWQgYWRpY2lvbmFsDQogICAgfTsNCg0KICAgIC8vIEFncmVnYXIgZWwgYm90w7NuIGFsIG1lbsO6DQogICAgbWVudS5hcHBlbmRDaGlsZChuZXdCdXR0b24pOw0KfQ0KDQovLyBMbGFtYXIgYSBsYSBmdW5jacOzbiBwYXJhIGFncmVnYXIgZWwgYm90w7NuIGN1YW5kbyBzZSBjYXJndWUgbGEgcMOhZ2luYQ0Kd2luZG93Lm9ubG9hZCA9IGZ1bmN0aW9uICgpIHsNCiAgICBhZGROZXdCdXR0b24oKTsNCn07DQoNCg0KDQo=" title="Editor de Texto"></iframe>
+
+    </TabItem>
+</Tabs> 
+
+

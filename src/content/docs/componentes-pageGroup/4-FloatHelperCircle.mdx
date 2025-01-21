@@ -1,0 +1,148 @@
+---
+title: 'Helper Flotante'
+description: 'Componente de botón de html de diálogo'
+---
+
+
+
+import HelperInfo from '../../components/FloatingHelperCircle.astro';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+
+
+
+# Introducción
+
+Uno entre tantos elementos que nos ayudan a tener una experiencia de usuario correcta, y que pone a disposicion un breve tutorial o bien, alguna anotacion para saber el uso de alguna herramienta o funcionalidad, por lo que se hace un breve Helper Flotante para mostrar informacion valiosa.
+
+
+## Usando el Componente de Helper Circular
+
+El uso de este elemento, es bastante simple, ya que no emplea Javascript y funciona simplemente con un id el cual traerla la informacion y luego se de la el estilo deseado o que necesitamos para el proyecto.
+
+
+
+<Tabs>
+    <TabItem label="HTML" icon="star">
+        ```html 
+
+    <!-- Círculo con el símbolo de pregunta -->
+    <div class="help-circle">?</div>
+
+    <!-- Caja de instrucciones en la parte inferior izquierda -->
+    <div class="tooltip-box">
+        <p><strong>Atajos:</strong></p>
+        <ul>
+            <li>Atajo de menú: <kbd>Shift + M</kbd></li>
+            <li>Pag. Sig: <kbd>▬▶</kbd></li>
+            <li>Pag. Ant: <kbd>◀▬</kbd></li>
+            <li>Acercar     :  <kbd>'+'</kbd></li>
+            <li>Alejar              :  <kbd>'-'</kbd></li>
+        </ul>
+        <p>El menu contiene opciones adiciones, archivos o recursos necesarios.</p>
+    </div> 
+        ```
+    </TabItem>
+    <TabItem label="CSS" icon="moon">
+        ```html collapse={4-80}
+        <style>
+            
+
+/* Contenedor del icono de ayuda */
+.help-circle {
+    /* position: fixed; */
+    bottom: 3.8vw;
+    left: 4.8vw;
+    width: 50px;
+    height: 50px;
+    background-color: #018E2E;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 1000;
+}
+
+    /* Círculo exterior para el efecto de respiración */
+    .help-circle::before {
+        content: "";
+        position: absolute;
+        width: 80px; /* Tamaño inicial del círculo exterior */
+        height: 80px;
+        border-radius: 50%;
+        background-color: rgba(69, 163, 43, 0.5); /* Color del círculo con opacidad */
+        animation: breathing 2.4s infinite; /* Animación de respiración */
+        z-index: -1; /* Coloca el círculo detrás del círculo principal */
+    }
+
+/* Animación de respiración */
+@keyframes breathing {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.2); /* Expande el círculo */
+        opacity: 0.3; /* Reduce la opacidad */
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+}
+
+/* Tooltip con instrucciones */
+.tooltip-box {
+    /* position: fixed; */
+    bottom: 8.2vw;
+    left: 20px;
+    background-color: rgba(250, 235, 48, 0.9);
+    color: black;
+    padding: 15px;
+    border-radius: 6px;
+    display: none; /* Oculto por defecto */
+    z-index: 100;
+    font-size: 14px;
+    width: 300px;
+}
+
+/* Mostrar el tooltip cuando se pasa el ratón sobre el círculo */
+.help-circle:hover + .tooltip-box {
+    display: block;
+}
+
+/* Flecha del tooltip */
+.tooltip-box::after {
+    content: "";
+    position: absolute;
+    top: 100%; /* Flecha apuntando hacia el círculo */
+    left: 50%;
+    margin-left: -100px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(250, 235, 48, 0.9) transparent transparent transparent;
+}
+
+
+        </style>           
+        ```
+    </TabItem>
+   
+    <TabItem label="Demo">
+
+            <iframe   style="width: 800px; height: 400px; border: none;" src="https://codi.link/DQogICAgPCEtLSBDw61yY3VsbyBjb24gZWwgc8OtbWJvbG8gZGUgcHJlZ3VudGEgLS0+DQogICAgPGRpdiBjbGFzcz0iaGVscC1jaXJjbGUiPj88L2Rpdj4NCg0KICAgIDwhLS0gQ2FqYSBkZSBpbnN0cnVjY2lvbmVzIGVuIGxhIHBhcnRlIGluZmVyaW9yIGl6cXVpZXJkYSAtLT4NCiAgICA8ZGl2IGNsYXNzPSJ0b29sdGlwLWJveCI+DQogICAgICAgIDxwPjxzdHJvbmc+QXRham9zOjwvc3Ryb25nPjwvcD4NCiAgICAgICAgPHVsPg0KICAgICAgICAgICAgPGxpPkF0YWpvIGRlIG1lbsO6OiA8a2JkPlNoaWZ0ICsgTTwva2JkPjwvbGk+DQogICAgICAgICAgICA8bGk+UGFnLiBTaWc6IDxrYmQ+4pas4pa2PC9rYmQ+PC9saT4NCiAgICAgICAgICAgIDxsaT5QYWcuIEFudDogPGtiZD7il4Dilqw8L2tiZD48L2xpPg0KICAgICAgICAgICAgPGxpPkFjZXJjYXIgICAgIDogIDxrYmQ+JysnPC9rYmQ+PC9saT4NCiAgICAgICAgICAgIDxsaT5BbGVqYXIgICAgICAgICAgICAgIDogIDxrYmQ+Jy0nPC9rYmQ+PC9saT4NCiAgICAgICAgPC91bD4NCiAgICAgICAgPHA+RWwgbWVudSBjb250aWVuZSBvcGNpb25lcyBhZGljaW9uZXMsIGFyY2hpdm9zIG8gcmVjdXJzb3MgbmVjZXNhcmlvcy48L3A+DQogICAgPC9kaXY+IA==%7CDQoNCi8qIENvbnRlbmVkb3IgZGVsIGljb25vIGRlIGF5dWRhICovDQouaGVscC1jaXJjbGUgew0KICAgIC8qIHBvc2l0aW9uOiBmaXhlZDsgKi8NCiAgICBib3R0b206IDMuOHZ3Ow0KICAgIGxlZnQ6IDQuOHZ3Ow0KICAgIHdpZHRoOiA1MHB4Ow0KICAgIGhlaWdodDogNTBweDsNCiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMDE4RTJFOw0KICAgIGNvbG9yOiB3aGl0ZTsNCiAgICBib3JkZXItcmFkaXVzOiA1MCU7DQogICAgZGlzcGxheTogZmxleDsNCiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsNCiAgICBhbGlnbi1pdGVtczogY2VudGVyOw0KICAgIGN1cnNvcjogcG9pbnRlcjsNCiAgICBmb250LXNpemU6IDI0cHg7DQogICAgei1pbmRleDogMTAwMDsNCn0NCg0KICAgIC8qIEPDrXJjdWxvIGV4dGVyaW9yIHBhcmEgZWwgZWZlY3RvIGRlIHJlc3BpcmFjacOzbiAqLw0KICAgIC5oZWxwLWNpcmNsZTo6YmVmb3JlIHsNCiAgICAgICAgY29udGVudDogIiI7DQogICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTsNCiAgICAgICAgd2lkdGg6IDgwcHg7IC8qIFRhbWHDsW8gaW5pY2lhbCBkZWwgY8OtcmN1bG8gZXh0ZXJpb3IgKi8NCiAgICAgICAgaGVpZ2h0OiA4MHB4Ow0KICAgICAgICBib3JkZXItcmFkaXVzOiA1MCU7DQogICAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoNjksIDE2MywgNDMsIDAuNSk7IC8qIENvbG9yIGRlbCBjw61yY3VsbyBjb24gb3BhY2lkYWQgKi8NCiAgICAgICAgYW5pbWF0aW9uOiBicmVhdGhpbmcgMi40cyBpbmZpbml0ZTsgLyogQW5pbWFjacOzbiBkZSByZXNwaXJhY2nDs24gKi8NCiAgICAgICAgei1pbmRleDogLTE7IC8qIENvbG9jYSBlbCBjw61yY3VsbyBkZXRyw6FzIGRlbCBjw61yY3VsbyBwcmluY2lwYWwgKi8NCiAgICB9DQoNCi8qIEFuaW1hY2nDs24gZGUgcmVzcGlyYWNpw7NuICovDQpAa2V5ZnJhbWVzIGJyZWF0aGluZyB7DQogICAgMCUgew0KICAgICAgICB0cmFuc2Zvcm06IHNjYWxlKDEpOw0KICAgICAgICBvcGFjaXR5OiAwLjc7DQogICAgfQ0KDQogICAgNTAlIHsNCiAgICAgICAgdHJhbnNmb3JtOiBzY2FsZSgxLjIpOyAvKiBFeHBhbmRlIGVsIGPDrXJjdWxvICovDQogICAgICAgIG9wYWNpdHk6IDAuMzsgLyogUmVkdWNlIGxhIG9wYWNpZGFkICovDQogICAgfQ0KDQogICAgMTAwJSB7DQogICAgICAgIHRyYW5zZm9ybTogc2NhbGUoMSk7DQogICAgICAgIG9wYWNpdHk6IDAuNzsNCiAgICB9DQp9DQoNCi8qIFRvb2x0aXAgY29uIGluc3RydWNjaW9uZXMgKi8NCi50b29sdGlwLWJveCB7DQogICAgLyogcG9zaXRpb246IGZpeGVkOyAqLw0KICAgIGJvdHRvbTogOC4ydnc7DQogICAgbGVmdDogMjBweDsNCiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDI1MCwgMjM1LCA0OCwgMC45KTsNCiAgICBjb2xvcjogYmxhY2s7DQogICAgcGFkZGluZzogMTVweDsNCiAgICBib3JkZXItcmFkaXVzOiA2cHg7DQogICAgZGlzcGxheTogbm9uZTsgLyogT2N1bHRvIHBvciBkZWZlY3RvICovDQogICAgei1pbmRleDogMTAwOw0KICAgIGZvbnQtc2l6ZTogMTRweDsNCiAgICB3aWR0aDogMzAwcHg7DQp9DQoNCi8qIE1vc3RyYXIgZWwgdG9vbHRpcCBjdWFuZG8gc2UgcGFzYSBlbCByYXTDs24gc29icmUgZWwgY8OtcmN1bG8gKi8NCi5oZWxwLWNpcmNsZTpob3ZlciArIC50b29sdGlwLWJveCB7DQogICAgZGlzcGxheTogYmxvY2s7DQp9DQoNCi8qIEZsZWNoYSBkZWwgdG9vbHRpcCAqLw0KLnRvb2x0aXAtYm94OjphZnRlciB7DQogICAgY29udGVudDogIiI7DQogICAgcG9zaXRpb246IGFic29sdXRlOw0KICAgIHRvcDogMTAwJTsgLyogRmxlY2hhIGFwdW50YW5kbyBoYWNpYSBlbCBjw61yY3VsbyAqLw0KICAgIGxlZnQ6IDUwJTsNCiAgICBtYXJnaW4tbGVmdDogLTEwMHB4Ow0KICAgIGJvcmRlci13aWR0aDogNXB4Ow0KICAgIGJvcmRlci1zdHlsZTogc29saWQ7DQogICAgYm9yZGVyLWNvbG9yOiByZ2JhKDI1MCwgMjM1LCA0OCwgMC45KSB0cmFuc3BhcmVudCB0cmFuc3BhcmVudCB0cmFuc3BhcmVudDsNCn0NCg0K%7C" title="Editor de Texto"></iframe>
+
+    </TabItem>
+</Tabs> 
+<div class="">
+
+
+<HelperInfo />
+</div>
+
+

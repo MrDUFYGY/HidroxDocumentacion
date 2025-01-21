@@ -1,0 +1,177 @@
+    <!-- Menú flotante -->
+    <div class="floating-menu" id="floating-menu">
+        <h4>Menú de opciones</h4>
+        <button id="openErrorDialogBtn">Reportar Error</button>
+ 
+
+        <button onclick="cierreMenuFlotante()" id="close-menu-btn">X</button>
+
+        <button onclick="window.location.href='/home'">Ir al Inicio
+        <!-- Botón que muestra la tarjeta de contacto -->
+
+
+
+        <button onclick="window.history.back();">Atras</button>
+        <button onclick="alert('Otra opción 3')">Ejemplo 1</button>
+
+
+    </div>
+
+    <script>
+function addNewButton() {
+    const menu = document.getElementById('floating-menu');
+
+    // Crear un nuevo botón
+    const newButton = document.createElement('button');
+    newButton.innerHTML = 'Ejemplo 2';
+    newButton.onclick = function () {
+        alert('Nueva opción seleccionada');
+        // Puedes agregar aquí cualquier funcionalidad adicional
+    };
+
+    // Agregar el botón al menú
+    menu.appendChild(newButton);
+}
+
+// Llamar a la función para agregar el botón cuando se cargue la página
+window.onload = function () {
+    addNewButton();
+};
+
+function cierreMenuFlotante () {
+    const menu = document.getElementById('floating-menu');
+    
+
+    // Función para cerrar el menú cuando se presiona el botón "X"
+
+        menu.style.display = 'none'; // Oculta el menú flotante
+        document.body.classList.remove('modal-open'); // Restaurar el scroll del body
+    
+}
+
+
+
+
+
+
+
+ //Función para manejar la apertura y cierre de los diálogos (modales) y refrescar iframes
+function manageModalBase(openBtnId, modalId, closeBtnId, iframeId = null, refreshBtnId = null) {
+    const openBtn = document.getElementById(openBtnId);
+    const modal = document.getElementById(modalId);
+    const closeBtn = document.getElementById(closeBtnId);
+    const iframe = iframeId ? document.getElementById(iframeId) : null;  // Verifica si hay iframe
+    const refreshBtn = refreshBtnId ? document.getElementById(refreshBtnId) : null;  // Verifica si hay botón de refrescar
+
+    if (openBtn && modal && closeBtn) {
+        // Abrir el modal al hacer clic en el botón
+        openBtn.addEventListener('click', () => {
+            modal.showModal();
+            document.body.classList.add('modal-open'); // Desactivar scroll del body
+        });
+
+        // Cerrar el modal al hacer clic en la "X"
+        closeBtn.addEventListener('click', () => {
+            modal.close();
+            checkModalsOpenUno(); // Verificar si algún modal o menú flotante está abierto
+        });
+
+        // Refrescar el iframe al hacer clic en el botón de refrescar (si existe)
+        if (refreshBtn && iframe) {
+            refreshBtn.addEventListener('click', () => {
+                iframe.src = iframe.src; // Recargar el iframe
+            });
+        }
+    } else {
+        console.warn(`Uno o más elementos faltan: ${openBtnId}, ${modalId}, ${closeBtnId}`);
+    }
+}
+
+// Verificar si algún modal está abierto para controlar el scroll
+function checkModalsOpenUno() {
+    const modals = ['figmaModal', 'spreadsheetModal', 'contactCardDialog', 'serviceDeskModal', 'errorDialog', 'errorLogDialog'];
+    const anyModalOpen = modals.some(id => document.getElementById(id)?.open);
+
+    if (!anyModalOpen) {
+        document.body.classList.remove('modal-open'); // Restaurar scroll del body
+    }
+}
+
+
+
+    // Para abrir el diálogo de visualización de errores
+    manageModalBase('openErrorLogBtn', 'errorLogDialog', 'closeErrorLogBtn', null, null);
+    // Para abrir el diálogo de reporte de errores
+    manageModalBase('openErrorDialogBtn', 'errorDialog', 'closeErrorDialogBtn', null, null);
+
+
+
+
+
+
+</script>
+
+
+
+<style>
+    /* Estilos para el menú flotante */
+#floating-menu {
+    position: fixed;
+    bottom: 20px;
+    right: 120px;
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.8);
+    max-height: 85%;
+    overflow-y: auto;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: block; /* Escondido por defecto */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+    #floating-menu button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        background-color: #D0D83A;
+        border: none;
+        color: black;
+        font-size: 12px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+        #floating-menu button:hover {
+            background-color: #18AC54;
+        }
+/* Botón flotante para cerrar o mostrar el menú */
+/* Estilo del botón "X" para cerrar el menú flotante */
+#close-menu-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    border: none;
+    max-height:30px;
+    max-width: 30px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    #close-menu-btn:hover {
+        color: yellow;
+    }
+</style>
+
+
+
+ 
+
+
+
+

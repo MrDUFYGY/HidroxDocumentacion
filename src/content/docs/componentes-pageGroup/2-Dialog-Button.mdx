@@ -1,0 +1,145 @@
+---
+title: 'Modal Button'
+description: 'Componente de botón de html de diálogo'
+---
+import DialogBasic from '../../components/Dialog-basic.astro';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+
+
+
+# Introducción
+
+Generalmente, cuando trabajamos en el desarrollo web vamos a encontrarnos con elementos o componentes como lo son los Modales, sin embargo, estamos optando por dos alternativas a el mismo problema, usando nativamente la etiqueta `<dialog>` o usando una libreria como `tailwind` y/o `bootstrap`.
+
+
+## Usando la etiqueta `<dialog>`
+
+Esta alternativa es la más sencilla y es la que vamos a usar en este caso, por lo que vamos a ver como se implementa en nuestro proyecto. Para ello, vamos a ver el siguiente codigo y tambien verlo en el demo. 
+
+
+<DialogBasic />
+
+<Tabs>
+    <TabItem label="HTML" icon="star">
+        ```html 
+        <div class="custom-dialog-container">
+            <button class="custom-dialog-open-btn">Abrir demo vanilla Dialog</button>
+
+            <dialog class="custom-dialog-box">
+                <p>Este es un diálogo funcional con clases específicas.</p>
+                <button class="custom-dialog-close-btn">Cerrar</button>
+            </dialog>
+        </div>
+        ```
+    </TabItem>
+    <TabItem label="CSS" icon="moon">
+        ```html collapse={4-80}
+        <style>
+            /* Estilo general del contenedor */
+            .custom-dialog-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 50px;
+                font-family: Arial, sans-serif;
+            }
+
+            /* Estilo para el botón que abre el diálogo */
+            .custom-dialog-open-btn {
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s ease;
+                width: 100%;
+            }
+
+            .custom-dialog-open-btn:hover {
+                background-color: #45a049;
+            }
+
+            /* Estilo del cuadro de diálogo */
+            .custom-dialog-box {
+                border: none;
+                border-radius: 10px;
+                padding: 20px;
+                width: 300px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                text-align: center;
+                background-color: #f9f9f9;
+                animation: fadeIn 0.3s ease-out;
+
+                /* Centrar el cuadro de diálogo */
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            /* Animación de entrada */
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translate(-50%, -40%);
+                }
+                to {
+                    opacity: 1;
+                    transform: translate(-50%, -50%);
+                }
+            }
+
+            /* Estilo para el botón que cierra el diálogo */
+            .custom-dialog-close-btn {
+                padding: 10px 15px;
+                background-color: #f44336;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 14px;
+                transition: background-color 0.3s ease;
+                margin-top: 15px;
+            }
+
+            .custom-dialog-close-btn:hover {
+                background-color: #d32f2f;
+            }
+
+            /* Estilo para el contenido del diálogo */
+            .custom-dialog-box p {
+                font-size: 16px;
+                color: #333;
+                margin-bottom: 20px;
+            }
+        </style>           
+        ```
+    </TabItem>
+    <TabItem label="JS" icon="moon">
+        ```html
+        <script type="text/javascript" is:inline>
+            const dialogBox = document.querySelector('.custom-dialog-box');
+            const openDialogButton = document.querySelector('.custom-dialog-open-btn');
+            const closeDialogButton = document.querySelector('.custom-dialog-close-btn');
+
+            openDialogButton.addEventListener('click', () => {
+                dialogBox.showModal();
+            });
+
+            closeDialogButton.addEventListener('click', () => {
+                dialogBox.close();
+            });
+        </script>
+        ```
+    </TabItem>
+    <TabItem label="Demo">
+
+            <iframe   style="width: 800px; height: 400px; border: none;" src="https://codi.link/PGRpdiBjbGFzcz0iY3VzdG9tLWRpYWxvZy1jb250YWluZXIiPg0KICAgIDxidXR0b24gY2xhc3M9ImN1c3RvbS1kaWFsb2ctb3Blbi1idG4iPkFicmlyIGRlbW8gdmFuaWxsYSBEaWFsb2c8L2J1dHRvbj4NCg0KICAgIDxkaWFsb2cgY2xhc3M9ImN1c3RvbS1kaWFsb2ctYm94Ij4NCiAgICAgICAgPHA+RXN0ZSBlcyB1biBkacOhbG9nbyBmdW5jaW9uYWwgY29uIGNsYXNlcyBlc3BlY8OtZmljYXMuPC9wPg0KICAgICAgICA8YnV0dG9uIGNsYXNzPSJjdXN0b20tZGlhbG9nLWNsb3NlLWJ0biI+Q2VycmFyPC9idXR0b24+DQogICAgPC9kaWFsb2c+DQo8L2Rpdj4NCg0K%7CPHN0eWxlPg0KICAgIC8qIEVzdGlsbyBnZW5lcmFsIGRlbCBjb250ZW5lZG9yICovDQogICAgLmN1c3RvbS1kaWFsb2ctY29udGFpbmVyIHsNCiAgICAgICAgZGlzcGxheTogZmxleDsNCiAgICAgICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjsNCiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjsNCiAgICAgICAgbWFyZ2luLXRvcDogNTBweDsNCiAgICAgICAgZm9udC1mYW1pbHk6IEFyaWFsLCBzYW5zLXNlcmlmOw0KICAgIH0NCg0KICAgIC8qIEVzdGlsbyBwYXJhIGVsIGJvdMOzbiBxdWUgYWJyZSBlbCBkacOhbG9nbyAqLw0KICAgIC5jdXN0b20tZGlhbG9nLW9wZW4tYnRuIHsNCiAgICAgICAgcGFkZGluZzogMTBweCAyMHB4Ow0KICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjNENBRjUwOw0KICAgICAgICBjb2xvcjogd2hpdGU7DQogICAgICAgIGJvcmRlcjogbm9uZTsNCiAgICAgICAgYm9yZGVyLXJhZGl1czogNXB4Ow0KICAgICAgICBjdXJzb3I6IHBvaW50ZXI7DQogICAgICAgIGZvbnQtc2l6ZTogMTZweDsNCiAgICAgICAgdHJhbnNpdGlvbjogYmFja2dyb3VuZC1jb2xvciAwLjNzIGVhc2U7DQogICAgICAgIHdpZHRoOiAxMDAlOw0KICAgIH0NCg0KICAgIC5jdXN0b20tZGlhbG9nLW9wZW4tYnRuOmhvdmVyIHsNCiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogIzQ1YTA0OTsNCiAgICB9DQoNCiAgICAvKiBFc3RpbG8gZGVsIGN1YWRybyBkZSBkacOhbG9nbyAqLw0KICAgIC5jdXN0b20tZGlhbG9nLWJveCB7DQogICAgICAgIGJvcmRlcjogbm9uZTsNCiAgICAgICAgYm9yZGVyLXJhZGl1czogMTBweDsNCiAgICAgICAgcGFkZGluZzogMjBweDsNCiAgICAgICAgd2lkdGg6IDMwMHB4Ow0KICAgICAgICBib3gtc2hhZG93OiAwIDRweCA4cHggcmdiYSgwLCAwLCAwLCAwLjIpOw0KICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7DQogICAgICAgIGJhY2tncm91bmQtY29sb3I6ICNmOWY5Zjk7DQogICAgICAgIGFuaW1hdGlvbjogZmFkZUluIDAuM3MgZWFzZS1vdXQ7DQoNCiAgICAgICAgLyogQ2VudHJhciBlbCBjdWFkcm8gZGUgZGnDoWxvZ28gKi8NCiAgICAgICAgcG9zaXRpb246IGZpeGVkOw0KICAgICAgICB0b3A6IDUwJTsNCiAgICAgICAgbGVmdDogNTAlOw0KICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTsNCiAgICB9DQoNCiAgICAvKiBBbmltYWNpw7NuIGRlIGVudHJhZGEgKi8NCiAgICBAa2V5ZnJhbWVzIGZhZGVJbiB7DQogICAgICAgIGZyb20gew0KICAgICAgICAgICAgb3BhY2l0eTogMDsNCiAgICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC00MCUpOw0KICAgICAgICB9DQogICAgICAgIHRvIHsNCiAgICAgICAgICAgIG9wYWNpdHk6IDE7DQogICAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTsNCiAgICAgICAgfQ0KICAgIH0NCg0KICAgIC8qIEVzdGlsbyBwYXJhIGVsIGJvdMOzbiBxdWUgY2llcnJhIGVsIGRpw6Fsb2dvICovDQogICAgLmN1c3RvbS1kaWFsb2ctY2xvc2UtYnRuIHsNCiAgICAgICAgcGFkZGluZzogMTBweCAxNXB4Ow0KICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjZjQ0MzM2Ow0KICAgICAgICBjb2xvcjogd2hpdGU7DQogICAgICAgIGJvcmRlcjogbm9uZTsNCiAgICAgICAgYm9yZGVyLXJhZGl1czogNXB4Ow0KICAgICAgICBjdXJzb3I6IHBvaW50ZXI7DQogICAgICAgIGZvbnQtc2l6ZTogMTRweDsNCiAgICAgICAgdHJhbnNpdGlvbjogYmFja2dyb3VuZC1jb2xvciAwLjNzIGVhc2U7DQogICAgICAgIG1hcmdpbi10b3A6IDE1cHg7DQogICAgfQ0KDQogICAgLmN1c3RvbS1kaWFsb2ctY2xvc2UtYnRuOmhvdmVyIHsNCiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogI2QzMmYyZjsNCiAgICB9DQoNCiAgICAvKiBFc3RpbG8gcGFyYSBlbCBjb250ZW5pZG8gZGVsIGRpw6Fsb2dvICovDQogICAgLmN1c3RvbS1kaWFsb2ctYm94IHAgew0KICAgICAgICBmb250LXNpemU6IDE2cHg7DQogICAgICAgIGNvbG9yOiAjMzMzOw0KICAgICAgICBtYXJnaW4tYm90dG9tOiAyMHB4Ow0KICAgIH0NCjwvc3R5bGU+%7CDQogICAgY29uc3QgZGlhbG9nQm94ID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLmN1c3RvbS1kaWFsb2ctYm94Jyk7DQogICAgY29uc3Qgb3BlbkRpYWxvZ0J1dHRvbiA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy5jdXN0b20tZGlhbG9nLW9wZW4tYnRuJyk7DQogICAgY29uc3QgY2xvc2VEaWFsb2dCdXR0b24gPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuY3VzdG9tLWRpYWxvZy1jbG9zZS1idG4nKTsNCg0KICAgIG9wZW5EaWFsb2dCdXR0b24uYWRkRXZlbnRMaXN0ZW5lcignY2xpY2snLCAoKSA9PiB7DQogICAgICAgIGRpYWxvZ0JveC5zaG93TW9kYWwoKTsNCiAgICB9KTsNCg0KICAgIGNsb3NlRGlhbG9nQnV0dG9uLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgKCkgPT4gew0KICAgICAgICBkaWFsb2dCb3guY2xvc2UoKTsNCiAgICB9KTsNCg==" title="Editor de Texto"></iframe>
+
+    </TabItem>
+</Tabs> 
+
+

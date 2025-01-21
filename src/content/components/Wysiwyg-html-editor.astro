@@ -1,0 +1,92 @@
+---
+
+---
+
+<style>
+    /* Estilos para el boton */
+    .openDialog{
+        background-color: #edff48;
+        color: black;
+        width: 100%;
+        height: 50px;
+        border-radius: 13px;
+        cursor: pointer;
+        font-size: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+    .openDialog:hover{
+        background-color: #66a860;
+    }
+    /* Estilos para el dialog */
+    dialog {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        height: 90%;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 0;
+        background: white;
+    }
+
+    dialog[open] {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .dialog-header {
+        padding: 10px;
+        background: #577c11;
+        color: white;
+        text-align: right;
+    }
+
+    .dialog-header button {
+        background: red;
+        border: none;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    iframe {
+        flex-grow: 1;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+</style>
+
+<!-- Botón para abrir el diálogo -->
+<button id="openDialog" class="openDialog btn btn-primary">Abrir Demo</button>
+
+<!-- Dialog -->
+<dialog id="editorDialog">
+    <div class="dialog-header">
+        <button id="closeDialog">Cerrar</button>
+    </div>
+    <iframe src="https://celadon-torte-1a058c.netlify.app/" title="Editor de Texto"></iframe>
+</dialog>
+
+<script type="text/javascript" is:inline>
+    // Referencias a los elementos
+    const dialog = document.getElementById('editorDialog');
+    const openDialogButton = document.getElementById('openDialog');
+    const closeDialogButton = document.getElementById('closeDialog');
+
+    // Abrir el dialog
+    openDialogButton.addEventListener('click', () => {
+        dialog.showModal();
+    });
+
+    // Cerrar el dialog
+    closeDialogButton.addEventListener('click', () => {
+        dialog.close();
+    });
+</script>
