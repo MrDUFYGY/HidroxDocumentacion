@@ -1,0 +1,34 @@
+---
+export interface Props {
+    width?: string;  // Ancho opcional (por defecto: 500px)
+    height?: string; // Alto opcional (por defecto: 500px)
+    color?: string;  // Color opcional (por defecto: amarillo #FAEB30)
+}
+
+// Props con valores predeterminados
+const { width = '500px', height = '500px', color = '#FAEB30' } = Astro.props;
+---
+
+
+<div class="recuadro">
+    <slot /> <!-- Aquí irá el contenido que se pase al componente -->
+</div>
+
+<style define:vars="{{ width, height, color }}">
+    /* Reset de estilos */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+        /* Recuadro */
+        .recuadro {
+        width: --(width);
+        height: --(height);
+        border-radius: 9px;
+        background-color: --(color);
+        border: 1px solid black; /* Agregar un borde visible */
+        margin: 20px auto; /* Centrar el recuadro horizontalmente */
+    }
+</style>

@@ -1,0 +1,139 @@
+---
+
+---
+
+<div class="floating-controls">
+    <div class="InputContainer">
+        <h4>Pag.</h4>
+        <div>
+            <input id="current_page_floating" class="current_page" value="1" type="number" />
+
+        </div>
+    </div>
+    <div id="zoom_controls">
+        <h4>Zoom</h4>
+        <div class="zoom-button-group">
+            <button id="zoom_out_floating" class="zoom_out">-</button>
+            <button id="zoom_in_floating" class="zoom_in">+</button>
+        </div>
+    </div>
+    <div class="download-print-controls">
+        <h4>Descarga</h4>
+        <button aria-label="Descargar manual" onclick="comprobadorDescarga()" >
+            <svg width="15" height="18" viewBox="0 0 15 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.4179 6.35294H10.7143V1.05882C10.7143 0.476471 10.2321 0 9.64286 0H5.35714C4.76786 0 4.28571 0.476471 4.28571 1.05882V6.35294H2.58214C1.62857 6.35294 1.14643 7.49647 1.82143 8.16353L6.73929 13.0235C7.15714 13.4365 7.83214 13.4365 8.25 13.0235L13.1679 8.16353C13.8429 7.49647 13.3714 6.35294 12.4179 6.35294ZM0 16.9412C0 17.5235 0.482143 18 1.07143 18H13.9286C14.5179 18 15 17.5235 15 16.9412C15 16.3588 14.5179 15.8824 13.9286 15.8824H1.07143C0.482143 15.8824 0 16.3588 0 16.9412Z" fill="black" />
+            </svg>
+        </button>
+    </div>
+</div>
+
+
+
+<style>
+    
+    /* Estilos para el menú flotante */
+.floating-controls {
+    position: absolute; /* Fijo en la pantalla */
+    bottom: 20px; /* Separación desde el fondo */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translateX(-50%); /* Asegura que esté completamente centrado */
+    display: flex; /* Flexbox para alinear los elementos */
+    gap: 15px; /* Espaciado entre los botones */
+    background-color: rgba(4, 85, 37, 0.8); /* Fondo semi-transparente */
+    padding: 15px 20px; /* Espacio interno (padding) */
+    border-radius: 20px; /* Bordes redondeados */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Sombra para darle efecto flotante */
+    z-index: 70; /* Asegura que esté por encima del contenido, pero por debajo del modal */
+    align-items: center; /* Alinear los elementos verticalmente */
+    
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transiciones de opacidad y posición */
+}
+
+.floating-controls.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0); /* Totalmente visible y centrada */
+}
+
+.floating-controls.hide {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px); /* Desplazada hacia abajo y oculta */
+}
+
+/* Estilos para los botones dentro de la isla flotante */
+.floating-controls button {
+    background: none; /* Sin fondo (puedes personalizarlo si quieres) */
+    gap: 1px;
+    width: 40px;
+    height: 40px;
+    border: none; /* Sin borde */
+    color: white; /* Color de texto blanco */
+    font-size: 18px; /* Tamaño de fuente */
+    cursor: pointer; /* Mostrar el cursor de pointer (mano) al pasar */
+    border-radius: 9px; /* Bordes redondeados */
+    
+} 
+
+.floating-controls input {
+    background-color: white; /* Fondo blanco para el input */
+    color: black; /* Texto negro */
+    padding: 5px; /* Espacio interno */
+    border-radius: 9px; /* Bordes redondeados */
+    border: none; /* Sin borde */
+    text-align: center; /* Centrar el número */
+    width: 50px; /* Tamaño fijo del input */
+}
+
+.zoom-button-group {
+    display: inline-flex;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ccc; /* Borde que envuelve ambos botones */
+    background-color: #D0D83A;
+}
+
+    .zoom-button-group button {
+        background-color: #D0D83A;
+        color: black;
+        padding: 10px 15px;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        display: inline-block;
+        min-width: 50px;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.35));
+    }
+
+        .zoom-button-group button:first-child {
+            border-right: 1px solid #ccc; /* Línea divisoria entre los botones */
+        }
+
+        .zoom-button-group button:hover {
+            background-color: #ddd; /* Color de fondo al pasar el mouse */
+        }
+
+        .zoom-button-group button:active {
+            background-color: #bbb; /* Color de fondo al hacer clic */
+        }
+
+button[aria-label="Descargar manual"] {
+    background-color: #D0D83A; /* Fondo transparente inicialmente */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Mostrar el cursor como puntero */
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.35));
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transición suave */
+}
+
+    button[aria-label="Descargar manual"]:hover {
+        background-color: #18AC54; /* Fondo con un color suave en hover */
+        transform: scale(1.1); /* Escala el botón ligeramente en hover */
+    }
+
+    button[aria-label="Descargar manual"] svg {
+        transition: fill 0.3s ease; /* Transición suave para el color del SVG */
+    }
+
+    button[aria-label="Descargar manual"]:hover svg {
+        fill: #ddd; /* Cambia el color del icono a verde en hover */
+    }
+
+</style>

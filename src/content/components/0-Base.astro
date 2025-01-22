@@ -1,0 +1,28 @@
+---
+
+---
+
+
+<div class="recuadro">
+    <slot /> <!-- Aquí irá el contenido que se pase al componente -->
+</div>
+
+<style>
+    /* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Recuadro */
+.recuadro {
+    width: 500px;
+    height: 300px;
+    border-radius: 9px;
+    background-color: #e0d865;
+    border: 1px solid black; /* Agregar un borde visible */
+    margin: 20px auto; /* Centrar el recuadro horizontalmente */
+}
+
+</style>
