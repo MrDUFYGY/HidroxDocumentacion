@@ -46,13 +46,13 @@ export default defineConfig({
                     { label: '3. Objetivos', slug: 'guides/3-proposito' },
                 ],
             },
-            // {
-            //     label: 'Documentación',
-            //     autogenerate: { directory: 'documentacion' },
-            // },
             {
                 label: 'Instalación de Tecnologías',
                 autogenerate: { directory: 'instalaciones' },
+            },
+            {
+                label: 'Documentación',
+                autogenerate: { directory: 'documentacion' },
             },
             // {
             //     label: 'Reference',
