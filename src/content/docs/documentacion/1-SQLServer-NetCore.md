@@ -3,7 +3,7 @@ title: SQL Server y .NET Core
 description: Una guía de uso para exponer la documentación de Hidrosina. 
 ---
 
-
+[Otro](#tecnologías)
 
 Anteriormente, Hidrosina como corporativo, ha utilizado la plataforma de .NET para el desarrollo de sus aplicaciones, como por ejemplo, sistemas de facturacion, soporte y la gestions de ciertos clientes. Por lo que, en este apartado daremos las bases para entender como utilizar y mejorar el desarrollo aportando las nuevas bases tecnologicas que nos permiten trabajar con herramientas como .NET, SQL Server, y que son compatibles con el desarrollo de sistemas embebidos.
 
@@ -20,6 +20,7 @@ Para dar inicio a este apartado, vamos a ver las tecnologias que utilizamos para
 - JSON 
 - XML
  
+
   
 
 ## Back-end
